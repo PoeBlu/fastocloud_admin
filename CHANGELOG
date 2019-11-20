@@ -1,0 +1,37 @@
+1.6.3 /
+[Alexandr Topilski]
+- Epg handling
+
+1.6.2 / October 17, 2019
+[Alexandr Topilski]
+- Vods proxy
+- Series
+
+1.6.1 / October 12, 2019
+[Alexandr Topilski]
+- Stream quality
+- Import subscribers from Xtream script
+
+1.6.0 / September 4, 2019
+[Alexandr Topilski]
+- Balancer
+
+1.5.0 / August 22, 2019
+[Alexandr Topilski]
+- Display OS
+- Online services streams
+- Channels on demand
+- Subscribers page
+- Providers page
+- User online
+- Tvg fields
+- User agents
+- Proxy streams
+- Icons for streams
+- Play stream button
+- User type
+- More user friendlt UI
+- Service version
+- Playlist generation
+- Avformat streams
+- Roles
