@@ -9,7 +9,7 @@ from app import get_runtime_stream_folder
 from app.common.stream.entry import IStream
 from app.common.stream.forms import ProxyStreamForm, EncodeStreamForm, RelayStreamForm, TimeshiftRecorderStreamForm, \
     CatchupStreamForm, TimeshiftPlayerStreamForm, TestLifeStreamForm, VodEncodeStreamForm, VodRelayStreamForm, \
-    ProxyVodStreamForm, CodEncodeStreamForm, CodRelayStreamForm
+    ProxyVodStreamForm, CodEncodeStreamForm, CodRelayStreamForm, EventStreamForm
 
 
 # routes
@@ -278,6 +278,23 @@ class StreamView(FlaskView):
         return jsonify(status='failed'), 404
 
     @login_required
+    @route('/add/event', methods=['GET', 'POST'])
+    def add_event(self):
+        server = current_user.get_current_server()
+        if server:
+            stream = server.make_event_stream()
+            form = EventStreamForm(obj=stream)
+            if request.method == 'POST' and form.validate_on_submit():
+                new_entry = form.update_entry(stream)
+                new_entry.save()
+                server.add_stream(new_entry)
+                return jsonify(status='ok'), 200
+
+            return render_template('stream/event/add.html', form=form,
+                                   feedback_dir=stream.generate_feedback_dir())
+        return jsonify(status='failed'), 404
+
+    @login_required
     @route('/add/cod_relay', methods=['GET', 'POST'])
     def add_cod_relay(self):
         server = current_user.get_current_server()
@@ -438,6 +455,16 @@ class StreamView(FlaskView):
                         return jsonify(status='ok'), 200
 
                     return render_template('stream/cod_encode/edit.html', form=form,
+                                           feedback_dir=stream.generate_feedback_dir())
+                elif type == constants.StreamType.EVENT:
+                    form = EventStreamForm(obj=stream)
+
+                    if request.method == 'POST' and form.validate_on_submit():
+                        stream = form.update_entry(stream)
+                        server.update_stream(stream)
+                        return jsonify(status='ok'), 200
+
+                    return render_template('stream/event/edit.html', form=form,
                                            feedback_dir=stream.generate_feedback_dir())
 
         return jsonify(status='failed'), 404
