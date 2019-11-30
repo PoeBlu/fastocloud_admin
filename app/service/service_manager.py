@@ -13,6 +13,14 @@ class ServiceManager(object):
         self._stop_listen = False
         self._servers_pool = []
 
+    @property
+    def host(self) -> str:
+        return self._host
+
+    @property
+    def port(self) -> int:
+        return self._port
+
     def stop(self):
         self._stop_listen = True
 
