@@ -50,6 +50,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
             width: 25%;
         }
 
+
 </style>
 {{super()}}
 {% endblock %}
@@ -760,11 +761,14 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                 </table>
                             </div>
                             <div class="row">
-                                <button class="btn btn-warning btn-send col-md-6" onclick="add_proxy_stream()">
+                                <button class="btn btn-warning btn-send col-md-4" onclick="add_proxy_stream()">
                                     {% trans %}Add proxy stream{% endtrans %}
                                 </button>
-                                <button class="btn btn-warning btn-send col-md-6" onclick="add_proxy_vod()">
+                                <button class="btn btn-warning btn-send col-md-4" onclick="add_proxy_vod()">
                                     {% trans %}Add proxy vod{% endtrans %}
+                                </button>
+                                <button class="btn btn-warning btn-send col-md-4" onclick="add_proxy_omdb_vod()">
+                                    {% trans %}Add proxy omdb vod{% endtrans %}
                                 </button>
                             </div>
                         </div>
@@ -814,7 +818,8 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                         <td>{{ (event.input_streams|sum(attribute='bps') / (1024 * 1024 / 8)) | round(4,
                                             'floor')}}
                                         </td>
-                                        <td>{{ (event.output_streams|sum(attribute='bps') / (1024 * 1024 / 8)) | round(4,
+                                        <td>{{ (event.output_streams|sum(attribute='bps') / (1024 * 1024 / 8)) |
+                                            round(4,
                                             'floor') }}
                                         </td>
                                         <td>{{ (event.timestamp - event.start_time)/1000 }}</td>
@@ -1215,6 +1220,23 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
             })
         });
     }
+
+    function add_proxy_omdb_vod() {
+        var oid = prompt("Please imdb id:");
+        if (oid != null) {
+            var url = "/stream/add/vod_proxy_omdb/" + oid;
+            $.get(url, function(data) {
+                $('#stream_dialog .modal-content').html(data);
+                $('#stream_dialog').modal();
+
+                $('#submit').click(function(event) {
+                    event.preventDefault();
+                    add_stream_entry(url);
+                })
+            });
+        }
+    }
+
     function edit_stream(sid) {
         var url = "/stream/edit/" + sid;
         $.get(url, function(data) {
@@ -1357,5 +1379,6 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
             }
         });
     }
+
 </script>
 {% endblock %}

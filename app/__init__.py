@@ -1,5 +1,7 @@
 import os
 
+from omdb import OMDBClient
+
 from flask import Flask
 from flask_mongoengine import MongoEngine
 from flask_login import LoginManager
@@ -77,10 +79,13 @@ def init_project(static_folder, *args):
     port = int(sn_port or _port)
     servers_manager = ServiceManager(host, port, socketio)
 
-    return app, bootstrap, babel, db, mail, login_manager, servers_manager
+    omdb_api_key = app.config.get('OMDB_KEY')
+    omdb = OMDBClient(apikey=omdb_api_key)
+
+    return app, bootstrap, babel, db, mail, login_manager, servers_manager, omdb
 
 
-app, bootstrap, babel, db, mail, login_manager, servers_manager = init_project(
+app, bootstrap, babel, db, mail, login_manager, servers_manager, omdb = init_project(
     'static',
     'config/public_config.py',
     'config/config.py',

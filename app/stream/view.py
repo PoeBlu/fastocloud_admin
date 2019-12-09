@@ -5,7 +5,7 @@ from flask import render_template, request, jsonify, Response
 from flask_login import login_required, current_user
 
 import app.common.constants as constants
-from app import get_runtime_stream_folder
+from app import get_runtime_stream_folder, omdb
 from app.common.stream.entry import IStream
 from app.common.stream.forms import ProxyStreamForm, EncodeStreamForm, RelayStreamForm, TimeshiftRecorderStreamForm, \
     CatchupStreamForm, TimeshiftPlayerStreamForm, TestLifeStreamForm, VodEncodeStreamForm, VodRelayStreamForm, \
@@ -134,6 +134,31 @@ class StreamView(FlaskView):
         if server:
             stream = server.make_proxy_vod()
             form = ProxyVodStreamForm(obj=stream)
+            if request.method == 'POST' and form.validate_on_submit():
+                new_entry = form.make_entry()
+                new_entry.save()
+                server.add_stream(new_entry)
+                return jsonify(status='ok'), 200
+
+            return render_template('stream/vod_proxy/add.html', form=form)
+        return jsonify(status='failed'), 404
+
+    @login_required
+    @route('/add/vod_proxy_omdb/<oid>', methods=['GET', 'POST'])
+    def add_vod_proxy_omdb(self, oid):
+        server = current_user.get_current_server()
+        if server:
+            stream = server.make_proxy_vod()
+            form = ProxyVodStreamForm(obj=stream)
+            if request.method == 'GET':
+                res = omdb.imdbid(oid)
+                form.name.data = res['title']
+                form.tvg_logo.data = res['poster']
+                form.preview_icon.data = res['poster']
+                #if res['type'] == 'series':
+                #    form.vod_type = constants.VodType.SERIES
+                form.country.data = res['country']
+
             if request.method == 'POST' and form.validate_on_submit():
                 new_entry = form.make_entry()
                 new_entry.save()
