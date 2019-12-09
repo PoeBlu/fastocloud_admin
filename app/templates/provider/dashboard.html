@@ -1222,7 +1222,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
     }
 
     function add_proxy_omdb_vod() {
-        var oid = prompt("Please imdb id:");
+        var oid = prompt("Please input imdb id:");
         if (oid != null) {
             var url = "/stream/add/vod_proxy_omdb/" + oid;
             $.get(url, function(data) {
@@ -1379,6 +1379,5 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
             }
         });
     }
-
 </script>
 {% endblock %}

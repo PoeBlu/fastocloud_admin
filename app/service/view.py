@@ -99,8 +99,6 @@ class ServiceView(FlaskView):
                     if len(tvg_logo) < constants.MAX_URL_LENGTH:
                         if is_valid_http_url(tvg_logo, timeout=0.1):
                             stream.tvg_logo = tvg_logo
-                            if stream_type == constants.StreamType.VOD_PROXY or stream_type == constants.StreamType.VOD_RELAY or stream_type == constants.StreamType.VOD_ENCODE:
-                                stream.preview_icon = tvg_logo
 
                     stream.save()
                     streams.append(stream)
