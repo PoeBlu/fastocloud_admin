@@ -17,7 +17,7 @@ from app.common.stream.forms import ProxyStreamForm, EncodeStreamForm, RelayStre
 class StreamView(FlaskView):
     DEFAULT_PIPELINE_FILENAME_TEMPLATE_1S = '{0}_pipeline.html'
 
-    route_base = "/stream/"
+    route_base = '/stream/'
 
     @staticmethod
     def _get_pipeline_name(sid: str):

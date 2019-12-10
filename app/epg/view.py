@@ -15,7 +15,7 @@ from app import app, get_epg_tmp_folder
 
 
 def gunzip(file_path, output_path):
-    with gzip.open(file_path, "rb") as f_in, open(output_path, "wb") as f_out:
+    with gzip.open(file_path, 'rb') as f_in, open(output_path, 'wb') as f_out:
         shutil.copyfileobj(f_in, f_out)
 
 
@@ -39,7 +39,7 @@ class EpgView(FlaskView):
 
             out_path = os.path.expanduser(os.path.join(epg_service_in_directory, name))
             status = True
-            if name.endswith(".gz"):
+            if name.endswith('.gz'):
                 try:
                     gunzip(path, out_path)
                 except Exception:

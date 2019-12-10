@@ -8,7 +8,7 @@ from app.common.epg.entry import Epg
 
 # routes
 class ProviderView(FlaskView):
-    route_base = "/"
+    route_base = '/'
 
     @login_required
     def dashboard(self):

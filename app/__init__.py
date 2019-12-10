@@ -55,7 +55,7 @@ def init_project(static_folder, *args):
     socketio = SocketIO(app)
     login_manager = LoginManager(app)
 
-    login_manager.login_view = "HomeView:signin"
+    login_manager.login_view = 'HomeView:signin'
 
     # socketio
     @socketio.on('connect')
