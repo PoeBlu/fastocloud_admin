@@ -6,7 +6,6 @@ COPY . /app
 COPY docker/db_config.py /app/app/config/
 WORKDIR /app
 
-RUN git submodule update --init --recursive
 RUN pip install -r requirements.txt
 
 EXPOSE 8080 6000
