@@ -12,8 +12,9 @@ def import_subscribers_to_server(db, server: ServiceSettings):
     sql_subscribers = cursor.fetchall()
 
     for sql_entry in sql_subscribers:
-        new_user = SubscriberUser.make_subscriber(email=sql_entry['username'], password=sql_entry['password'],
-                                                  country='US')
+        new_user = SubscriberUser.make_subscriber(email=sql_entry['username'], first_name=sql_entry['username'],
+                                                  last_name=sql_entry['username'], password=sql_entry['password'],
+                                                  country='US', language='US')
         new_user.status = SubscriberUser.Status.ACTIVE
         created_at = sql_entry['created_at']
         if created_at:
