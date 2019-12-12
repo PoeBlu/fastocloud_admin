@@ -24,6 +24,7 @@ services:
             - 8000:8000
             - 7000:7000
             - 6000:6000
+            - 6001:6001
     nginx:
         image: nginx
         container_name: nginx
