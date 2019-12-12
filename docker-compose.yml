@@ -16,7 +16,7 @@ services:
         command: ./server.py
         ports:
             - 8080:8080
-    iptv:
+    fastocloud:
         build: https://github.com/fastogt/fastocloud.git
         container_name: fastocloud
         ports:
