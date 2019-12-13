@@ -20,10 +20,19 @@ services:
         build: https://github.com/fastogt/fastocloud.git
         container_name: fastocloud
         ports:
-            - 6317:6317
-            - 8000:8000
-            - 7000:7000
             - 6001:6001
+            - 6317:6317
+            - 7000:7000
+            - 8000:8000
+    fastocloud_load_balance:
+        image: fastogt/fastocloud_load_balance
+        container_name: fastocloud_load_balance
+        depends_on:
+            - mongodb
+        ports:
+            - 5001:5001
+            - 5317:5317
+            - 6000:6000
     nginx:
         image: nginx
         container_name: nginx
