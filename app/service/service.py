@@ -5,7 +5,7 @@ from app.common.stream.entry import IStream, ProxyStream, EncodeStream, RelayStr
     CodRelayStream, CodEncodeStream, EventStream
 from pyfastocloud.client_constants import ClientStatus
 
-from app.common.service.entry import ServiceSettings, ProviderPair
+from app.common.service.entry import ServiceSettings, ProviderPair, safe_delete_stream
 from app.service.service_client import ServiceClient, OperationSystem
 from app.service.stream_handler import IStreamHandler
 
@@ -244,15 +244,13 @@ class Service(IStreamHandler):
             if stream.id == ObjectId(sid):
                 self._client.stop_stream(sid)
                 self._streams.remove(stream)
-                self._settings.streams.remove(stream)
-                stream.delete()
+                safe_delete_stream(stream)
                 break
 
     def remove_all_streams(self):
         for stream in self._streams:
             self._client.stop_stream(stream.get_id())
-            self._settings.streams.remove(stream)
-            stream.delete()
+            safe_delete_stream(stream)
         self._streams = []
 
     def stop_all_streams(self):
