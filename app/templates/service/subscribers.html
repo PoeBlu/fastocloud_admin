@@ -55,12 +55,11 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
                         </td>
                         <td>
                             {{ subscriber.exp_date }}
-                        </td>
                         <td>
                             {{ ['NOT_ACTIVE', 'ACTIVE', 'TRIAL_FINISHED', 'BANNED'][subscriber.status] }}
                         </td>
                         <td>
-                            {{ subscriber.devices|length }}
+                            {{ subscriber.devices|length }} / {{ subscriber.max_devices_count }}
                         </td>
                         <td>
                             <button type="submit" class="btn btn-success btn-xs"
@@ -210,5 +209,6 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
             })
         });
     }
+
 </script>
 {%- endblock %}
