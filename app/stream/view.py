@@ -11,6 +11,7 @@ from app.common.stream.entry import IStream
 from app.common.stream.forms import ProxyStreamForm, EncodeStreamForm, RelayStreamForm, TimeshiftRecorderStreamForm, \
     CatchupStreamForm, TimeshiftPlayerStreamForm, TestLifeStreamForm, VodEncodeStreamForm, VodRelayStreamForm, \
     ProxyVodStreamForm, CodEncodeStreamForm, CodRelayStreamForm, EventStreamForm
+from app.common.series.forms import SerialForm
 
 
 # routes
@@ -111,6 +112,22 @@ class StreamView(FlaskView):
             return '''<pre>Not found, please use get pipeline button firstly.</pre>'''
 
     # broadcast routes
+
+    @login_required
+    @route('/add/serial', methods=['GET', 'POST'])
+    def add_serial(self):
+        server = current_user.get_current_server()
+        if server:
+            serial = server.make_serial()
+            form = SerialForm(obj=serial)
+            if request.method == 'POST' and form.validate_on_submit():
+                new_entry = form.make_entry()
+                new_entry.save()
+                server.add_serial(new_entry)
+                return jsonify(status='ok'), 200
+
+            return render_template('series/add.html', form=form)
+        return jsonify(status='failed'), 404
 
     @login_required
     @route('/add/proxy_stream', methods=['GET', 'POST'])

@@ -5,6 +5,7 @@ from app.common.stream.entry import IStream, ProxyStream, EncodeStream, RelayStr
     CodRelayStream, CodEncodeStream, EventStream
 from pyfastocloud.client_constants import ClientStatus
 
+from app.common.series.entry import Serial
 from app.common.service.entry import ServiceSettings, ProviderPair, safe_delete_stream
 from app.service.service_client import ServiceClient, OperationSystem
 from app.service.stream_handler import IStreamHandler
@@ -223,6 +224,15 @@ class Service(IStreamHandler):
 
         return ProviderPair.Roles.READ
 
+    def add_serial(self, serial):
+        self._settings.series.append(serial)
+        self._settings.save()
+
+    def remove_serial(self, sid: str):
+        for ser in self._settings.series:
+            if ser.id == ObjectId(sid):
+                ser.delete()
+
     def add_stream(self, stream):
         self.__init_stream_runtime_fields(stream)
         self._streams.append(stream)
@@ -270,6 +280,9 @@ class Service(IStreamHandler):
                 ServiceFields.UPTIME: self._uptime, ServiceFields.TIMESTAMP: self._timestamp,
                 ServiceFields.STATUS: self.status, ServiceFields.ONLINE_USERS: str(self.online_users),
                 ServiceFields.OS: str(self.os)}
+
+    def make_serial(self) -> Serial:
+        return Serial()
 
     def make_proxy_stream(self) -> ProxyStream:
         return ProxyStream.make_stream(self._settings)

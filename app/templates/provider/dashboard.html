@@ -51,6 +51,8 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
         }
 
 
+
+
 </style>
 {{super()}}
 {% endblock %}
@@ -289,6 +291,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                         <li><a href="#cods" data-toggle="tab">Channel on demand</a></li>
                         <li><a href="#proxy" data-toggle="tab">Proxy</a></li>
                         <li><a href="#events" data-toggle="tab">Events (Pay per view)</a></li>
+                        <li><a href="#series" data-toggle="tab">Series</a></li>
                     </ul>
                 </div>
                 <div class="panel-body">
@@ -910,6 +913,13 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                 </button>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="series">
+                            <div class="row">
+                                <button class="btn btn-info btn-send col-md-12" onclick="add_serial()">
+                                    {% trans %}Add serial{% endtrans %}
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1027,6 +1037,35 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
       var service_connections = $('#service_connections');
       service_connections.text(service.online_users);
     });
+    function add_serial_entry(url) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: 'json',
+            data: $('#stream_entry_form').serialize(),
+            success: function (response) {
+                console.log(response);
+                $('#stream_dialog').modal('hide');
+                window.location.reload();
+            },
+            error: function (error) {
+                console.error(error);
+                $('#stream_dialog .modal-content').html(data);
+            }
+        });
+    }
+    function add_serial() {
+        var url = "{{ url_for('StreamView:add_serial') }}";
+        $.get(url, function(data) {
+            $('#stream_dialog .modal-content').html(data);
+            $('#stream_dialog').modal();
+
+            $('#submit').click(function(event) {
+                event.preventDefault();
+                add_serial_entry(url);
+            })
+        });
+    }
     // stream
     function add_stream_entry(url) {
         $.ajax({
@@ -1379,5 +1418,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
             }
         });
     }
+
+
 </script>
 {% endblock %}
