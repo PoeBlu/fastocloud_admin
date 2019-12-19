@@ -1,5 +1,6 @@
 import os
 import datetime
+import re
 
 from flask_classy import FlaskView, route
 from flask import render_template, request, jsonify, Response
@@ -179,9 +180,12 @@ class StreamView(FlaskView):
                 form.user_score.data = float(res['imdb_rating']) * 10
                 form.group.data = res['genre'].replace(',', ';')
                 form.prime_date.data = datetime.datetime.strptime(res['released'], '%d %b %Y')
-                runt = datetime.datetime.strptime(res['runtime'], '%M min')
-                mseconds = (runt.hour * 60000 + runt.minute) * 60000 + runt.second * 1000 + runt.microsecond / 1000
-                form.duration.data = int(mseconds)
+                runt_raw = res['runtime']
+                minutes = re.findall('\d+', runt_raw)
+                if minutes:
+                    # runt = datetime.time(minute=int(minutes[0]))
+                    # mseconds = (runt.hour * 60000 + runt.minute) * 60000 + runt.second * 1000 + runt.microsecond / 1000
+                    form.duration.data = int(minutes[0]) * 60000
 
             if request.method == 'POST' and form.validate_on_submit():
                 new_entry = form.make_entry()
