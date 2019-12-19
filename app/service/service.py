@@ -255,14 +255,14 @@ class Service(IStreamHandler):
                 self._client.stop_stream(sid)
                 self._streams.remove(stream)
                 safe_delete_stream(stream)
-        # self._settings.save()
+        self._settings.save()
 
     def remove_all_streams(self):
         for stream in self._streams:
             self._client.stop_stream(stream.get_id())
             safe_delete_stream(stream)
         self._streams = []
-        # self._settings.save()
+        self._settings.save()
 
     def stop_all_streams(self):
         for stream in self._streams:
