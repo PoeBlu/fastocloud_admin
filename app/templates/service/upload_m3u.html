@@ -17,8 +17,8 @@ Upload m3u | {{ config['PUBLIC_CONFIG'].site.title }}
     <div class="panel-body">
         <div class="container-fluid">
             <div class="row well">
-                <h3>{% trans %}Upload m3u files{% endtrans %}</h3>
-                <p>{% trans %}Note: Please upload m3u files for service.{% endtrans %}</p>
+                <h3>Upload m3u files</h3>
+                <p>Note: Please upload m3u files for service.</p>
                 {{ util.flashed_messages(dismissible=True, container=False) }}
                 <form action="{{ url_for('ServiceView:upload_files') }}" method="POST" class="form" role="form"
                       enctype="multipart/form-data">
@@ -36,7 +36,7 @@ Upload m3u | {{ config['PUBLIC_CONFIG'].site.title }}
             </div>
             <div class="row">
                 <a href="{{ url_for('ProviderView:dashboard') }}" role="button" class="btn btn-info">
-                    {% trans %}Dashboard{% endtrans %}
+                    Dashboard
                 </a>
             </div>
         </div>

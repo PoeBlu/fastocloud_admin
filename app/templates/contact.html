@@ -24,20 +24,20 @@ Contact | {{ config['PUBLIC_CONFIG'].site.title }}
                 <div class="form-group  required text-left">
                     <label class="control-label" for="email">{{ form.email.label }}</label>
                     <input class="form-control" id="email" name="email"
-                           placeholder="{% trans %}Your email will be used to contact you.{% endtrans %}" required
+                           placeholder="Your email will be used to contact you." required
                            type="text"
                            value="">
                 </div>
                 <div class="form-group  required text-left">
                     <label class="control-label" for="subject">{{ form.subject.label }}</label>
                     <input class="form-control" id="subject" name="subject"
-                           placeholder="{% trans %}Enter a subject.{% endtrans %}" required type="subject"
+                           placeholder="Enter a subject." required type="subject"
                            value="">
                 </div>
                 <div class="form-group  required text-left">
                     <label class="control-label" for="message">{{ form.message.label }}</label>
                     <input class="form-control" id="message" name="message"
-                           placeholder="{% trans %}Enter a message.{% endtrans %}" required type="message"
+                           placeholder="Enter a message." required type="message"
                            value="">
                 </div>
                 {{ form_field(form.submit, class="btn") }}
@@ -47,7 +47,7 @@ Contact | {{ config['PUBLIC_CONFIG'].site.title }}
     </div>
     <div class="text-center">
         <a class="back-to-site" href="{{ url_for('HomeView:index') }}">
-            &#8592;&nbsp;{% trans %}Home{% endtrans %} {{ config['PUBLIC_CONFIG'].site.title }}
+            &#8592;&nbsp;Home {{ config['PUBLIC_CONFIG'].site.title }}
         </a>
     </div>
 </div>

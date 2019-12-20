@@ -17,16 +17,16 @@ Providers | {{ config['PUBLIC_CONFIG'].site.title }}
         <div class="container-fluid">
             <div class="row well">
                 <div class="col-md-8">
-                    <p>{% trans %}Providers{% endtrans %}</p>
+                    <p>Providers</p>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url_for('ProviderView:dashboard') }}" role="button" class="btn btn-info">
-                        {% trans %}Dashboard{% endtrans %}
+                        Dashboard
                     </a>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url_for('ProviderView:logout') }}" class="btn btn-warning" role="button">
-                        {% trans %}Logout{% endtrans %}
+                        Logout
                     </a>
                 </div>
             </div>
@@ -35,11 +35,11 @@ Providers | {{ config['PUBLIC_CONFIG'].site.title }}
                     <thead>
                     <tr>
                         <th class="provider_number">#</th>
-                        <th class="provider_name">{% trans %}Email{% endtrans %}</th>
-                        <th class="provider_status">{% trans %}Create date{% endtrans %}</th>
-                        <th class="provider_status">{% trans %}Status{% endtrans %}</th>
-                        <th class="provider_role">{% trans %}Role{% endtrans %}</th>
-                        <th class="provider_actions">{% trans %}Actions{% endtrans %}</th>
+                        <th class="provider_name">Email</th>
+                        <th class="provider_status">Create date</th>
+                        <th class="provider_status">Status</th>
+                        <th class="provider_role">Role</th>
+                        <th class="provider_actions">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,7 @@ Providers | {{ config['PUBLIC_CONFIG'].site.title }}
                         <td>
                             <button type="submit" class="btn btn-danger btn-xs"
                                     onclick="remove_provider_from_server('{{ server.id }}', '{{ provider.user.id }}')">
-                                {% trans %}Remove{% endtrans %}
+                                Remove
                             </button>
                         </td>
                     </tr>
@@ -72,7 +72,7 @@ Providers | {{ config['PUBLIC_CONFIG'].site.title }}
             <div class="row">
                 <button type="submit" class="btn btn-success col-md-12"
                         onclick="add_provider_to_server('{{ server.id }}')">
-                    {% trans %}Add provider{% endtrans %}
+                    Add provider
                 </button>
             </div>
         </div>

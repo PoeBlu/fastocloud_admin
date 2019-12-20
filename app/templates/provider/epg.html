@@ -21,16 +21,16 @@ Epg | {{ config['PUBLIC_CONFIG'].site.title }}
         <div class="container-fluid">
             <div class="row well">
                 <div class="col-md-8">
-                    <p>{% trans %}Epg{% endtrans %}</p>
+                    <p>Epg</p>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url_for('ProviderView:dashboard') }}" role="button" class="btn btn-info">
-                        {% trans %}Dashboard{% endtrans %}
+                        Dashboard
                     </a>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url_for('ProviderView:logout') }}" class="btn btn-warning" role="button">
-                        {% trans %}Logout{% endtrans %}
+                        Logout
                     </a>
                 </div>
             </div>
@@ -40,7 +40,7 @@ Epg | {{ config['PUBLIC_CONFIG'].site.title }}
                         <thead>
                         <tr>
                             <th class="number">#</th>
-                            <th class="value">{% trans %}Url{% endtrans %}</th>
+                            <th class="value">Url</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,11 +51,11 @@ Epg | {{ config['PUBLIC_CONFIG'].site.title }}
                             <td>
                                 <button type="submit" class="btn btn-success btn-xs"
                                         onclick="edit_epg('{{ epg.id }}')">
-                                    {% trans %}Edit{% endtrans %}
+                                    Edit
                                 </button>
                                 <button type="submit" class="btn btn-danger btn-xs"
                                         onclick="remove_epg('{{ epg.id }}')">
-                                    {% trans %}Remove{% endtrans %}
+                                    Remove
                                 </button>
                             </td>
                         </tr>
@@ -67,17 +67,17 @@ Epg | {{ config['PUBLIC_CONFIG'].site.title }}
             <div class="row">
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-success" onclick="add_epg()">
-                        {% trans %}Add epg{% endtrans %}
+                        Add epg
                     </button>
                 </div>
                 <div class="col-md-4">
                     <a href="{{ url_for('EpgView:upload_urls') }}" role="button" class="btn btn-success">
-                        {% trans %}Upload txt urls{% endtrans %}
+                        Upload txt urls
                     </a>
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-success" onclick="update_urls()">
-                        {% trans %}Update{% endtrans %}
+                        Update
                     </button>
                 </div>
             </div>

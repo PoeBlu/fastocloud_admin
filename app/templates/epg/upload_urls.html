@@ -17,8 +17,8 @@ Upload epg | {{ config['PUBLIC_CONFIG'].site.title }}
     <div class="panel-body">
         <div class="container-fluid">
             <div class="row well">
-                <h3>{% trans %}Upload epg file{% endtrans %}</h3>
-                <p>{% trans %}Note: Please upload file with epg urls.{% endtrans %}</p>
+                <h3>Upload epg file</h3>
+                <p>Note: Please upload file with epg urls.</p>
                 {{ util.flashed_messages(dismissible=True, container=False) }}
                 <form action="{{ url_for('EpgView:upload_file') }}" method="POST" class="form" role="form"
                       enctype="multipart/form-data">
@@ -33,7 +33,7 @@ Upload epg | {{ config['PUBLIC_CONFIG'].site.title }}
             </div>
             <div class="row">
                 <a href="{{ url_for('ProviderView:epg') }}" role="button" class="btn btn-info">
-                    {% trans %}Epg{% endtrans %}
+                    Epg
                 </a>
             </div>
         </div>

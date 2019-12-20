@@ -17,22 +17,22 @@ Activate service | {{ config['PUBLIC_CONFIG'].site.title }}
     <div class="panel-body">
         <div class="container-fluid">
             <div class="row well">
-                <h3>{% trans %}License{% endtrans %}</h3>
-                <p>{% trans %}Note: Please activate service.{% endtrans %}</p>
+                <h3>License</h3>
+                <p>Note: Please activate service.</p>
                 {{ util.flashed_messages(dismissible=True, container=False) }}
                 <form action="" method="post" class="form" role="form">
                     {{ form.hidden_tag() }}
                     <div class="form-group  required text-left">
                         <label class="control-label" for="license">{{ form.license.label }}</label>
                         <input class="form-control" id="license" name="license"
-                               placeholder="{% trans %}Activate service.{% endtrans %}" required type="text" value="">
+                               placeholder="Activate service." required type="text" value="">
                     </div>
                     {{ form_field(form.submit, class="btn btn-success") }}
                 </form>
             </div>
             <div class="row">
                 <a href="{{ url_for('ProviderView:dashboard') }}" role="button" class="btn btn-info">
-                    {% trans %}Dashboard{% endtrans %}
+                    Dashboard
                 </a>
             </div>
         </div>

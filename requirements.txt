@@ -9,7 +9,6 @@ validate_email>=1.0
 requests>=1.0.0
 wtforms>=2.0
 python-dateutil>=2.1
-Flask-Babel>=0.11.2
 gevent>=1.1.0
 omdb>=0.10.1
 git+git://github.com/fastogt/pyfastogt@master#egg=pyfastogt

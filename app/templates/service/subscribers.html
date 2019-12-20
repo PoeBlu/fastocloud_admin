@@ -17,16 +17,16 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
         <div class="container-fluid">
             <div class="row well">
                 <div class="col-md-8">
-                    <p>{% trans %}Subscribers{% endtrans %}</p>
+                    <p>Subscribers</p>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url_for('ProviderView:dashboard') }}" role="button" class="btn btn-info">
-                        {% trans %}Dashboard{% endtrans %}
+                        Dashboard
                     </a>
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url_for('ProviderView:logout') }}" class="btn btn-warning" role="button">
-                        {% trans %}Logout{% endtrans %}
+                        Logout
                     </a>
                 </div>
             </div>
@@ -35,12 +35,12 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
                     <thead>
                     <tr>
                         <th class="stream_number">#</th>
-                        <th class="login">{% trans %}Login{% endtrans %}</th>
-                        <th class="create_date">{% trans %}Create date{% endtrans %}</th>
-                        <th class="end_date">{% trans %}End date{% endtrans %}</th>
-                        <th class="status">{% trans %}Status{% endtrans %}</th>
-                        <th class="devices_count">{% trans %}Devices count{% endtrans %}</th>
-                        <th class="actions">{% trans %}Actions{% endtrans %}</th>
+                        <th class="login">Login</th>
+                        <th class="create_date">Create date</th>
+                        <th class="end_date">End date</th>
+                        <th class="status">Status</th>
+                        <th class="devices_count">Devices count</th>
+                        <th class="actions">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -64,15 +64,15 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
                         <td>
                             <button type="submit" class="btn btn-success btn-xs"
                                     onclick="edit_subscriber('{{ subscriber.id }}')">
-                                {% trans %}Edit{% endtrans %}
+                                Edit
                             </button>
                             <button type="submit" class="btn btn-success btn-xs"
                                     onclick="send_message_for_subscriber('{{ subscriber.id }}')">
-                                {% trans %}Send message{% endtrans %}
+                                Send message
                             </button>
                             <button type="submit" class="btn btn-danger btn-xs"
                                     onclick="remove_subscriber('{{ subscriber.id }}')">
-                                {% trans %}Remove{% endtrans %}
+                                Remove
                             </button>
                         </td>
                     </tr>
@@ -83,7 +83,7 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
             <div class="row">
                 <button type="submit" class="btn btn-success col-md-12"
                         onclick="add_subscriber_to_server('{{ server.id }}')">
-                    {% trans %}Add subscriber{% endtrans %}
+                    Add subscriber
                 </button>
             </div>
         </div>

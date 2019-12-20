@@ -75,30 +75,30 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                         <img width="64px" height="64px" src="{{ url_for('static', filename='images/logo.png') }}"/>
                     </div>
                     <div class="col-md-7">
-                        <p>{% trans %}Welcome{% endtrans %} {{ current_user.email }}</p>
+                        <p>Welcome {{ current_user.email }}</p>
                     </div>
                     <div class="col-md-1">
                         <a href="{{ url_for('ProviderView:settings') }}" class="btn btn-info" role="button">
-                            {% trans %}Settings{% endtrans %}
+                            Settings
                         </a>
                     </div>
                     {% if (config['EPG_SUPPORT']) %}
                     <div class="col-md-1">
                         <a href="{{ url_for('ProviderView:epg') }}" class="btn btn-success"
                            role="button">
-                            {% trans %}Epg{% endtrans %}
+                            Epg
                         </a>
                     </div>
                     {% endif %}
                     <div class="col-md-1">
                         <a href="{{ url_for('ProviderView:logout') }}" class="btn btn-warning" role="button">
-                            {% trans %}Logout{% endtrans %}
+                            Logout
                         </a>
                     </div>
                     {% if (current_user.type != 0) %}
                     <div class="col-md-1">
                         <a href="{{ url_for('ProviderView:remove') }}" class="btn btn-danger" role="button">
-                            {% trans %}Delete{% endtrans %}
+                            Delete
                         </a>
                     </div>
                     {% endif %}
@@ -120,11 +120,11 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                     <div class="col-md-1">
                         {% if (service.status == service.status.INIT) %}
                         <a href="{{ url_for('ServiceView:connect') }}" class="btn btn-info" role="button">
-                            {% trans %}Connect{% endtrans %}
+                            Connect
                         </a>
                         {% else %}
                         <a href="{{ url_for('ServiceView:disconnect') }}" class="btn btn-info" role="button">
-                            {% trans %}Disconnect{% endtrans %}
+                            Disconnect
                         </a>
                         {% endif %}
                     </div>
@@ -135,7 +135,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                            {% else %}
                            class="btn btn-info"
                            {% endif %}>
-                            {% trans %}Activate{% endtrans %}
+                            Activate
                         </a>
                     </div>
                     <div class="col-md-1">
@@ -145,18 +145,18 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                            {% else %}
                            class="btn btn-info"
                            {% endif %}>
-                            {% trans %}Sync{% endtrans %}
+                            Sync
                         </a>
                     </div>
                     <div class="col-md-1">
                         <a href="{{ url_for('ServiceView:playlist', sid=service.id) }}" class="btn btn-success"
                            role="button">
-                            {% trans %}Playlist{% endtrans %}
+                            Playlist
                         </a>
                     </div>
                     <div class="col-md-1">
                         <a href="{{ url_for('ServiceView:upload_m3u') }}" role="button" class="btn btn-success">
-                            {% trans %}Upload m3u{% endtrans %}
+                            Upload m3u
                         </a>
                     </div>
                     <div class="col-md-1">
@@ -166,7 +166,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                            {% else %}
                            class="btn btn-info disabled"
                            {% endif %}>
-                            {% trans %}Ping{% endtrans %}
+                            Ping
                         </a>
                     </div>
                     <div class="col-md-1">
@@ -176,20 +176,20 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                            {% else %}
                            class="btn btn-warning disabled"
                            {% endif %}>
-                            {% trans %}Stop{% endtrans %}
+                            Stop
                         </a>
                     </div>
                     <div class="col-md-1">
                         <a href="{{ url_for('ServiceView:providers', sid=service.id) }}" class="btn btn-success"
                            role="button">
-                            {% trans %}Providers{% endtrans %}
+                            Providers
                         </a>
                     </div>
                     {% if (config['SUBSCRIBERS_SUPPORT']) %}
                     <div class="col-md-1">
                         <a href="{{ url_for('ServiceView:subscribers', sid=service.id) }}" class="btn btn-success"
                            role="button">
-                            {% trans %}Subscribers{% endtrans %}
+                            Subscribers
                         </a>
                     </div>
                     {% endif %}
@@ -201,12 +201,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                            {% else %}
                            class="btn btn-success disabled"
                            {% endif %}>
-                            {% trans %}Get log{% endtrans %}
+                            Get log
                         </a>
                     </div>
                     <div class="col-md-1">
                         <a href="{{ url_for('ServiceView:view_log') }}" role="button" class="btn btn-info">
-                            {% trans %}View log{% endtrans %}
+                            View log
                         </a>
                     </div>
                     {% endif %}
@@ -214,71 +214,71 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                 </br>
                 <div class="row">
                     <div class="col-md-2">
-                        <b>{% trans %}ID:{% endtrans %}</b>
+                        <b>ID:</b>
                         <p id='service_id'>{{ service.id }}</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Timestamp:{% endtrans %}</b>
+                        <b>Timestamp:</b>
                         <p id='service_timestamp'>{{ service.timestamp }}</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Uptime:{% endtrans %}</b>
+                        <b>Uptime:</b>
                         <p id='service_uptime'>{{ service.uptime }} Seconds</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Load:{% endtrans %}</b>
+                        <b>Load:</b>
                         <p id='service_load_average'>{{ service.load_average }}</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}State:{% endtrans %}</b>
+                        <b>State:</b>
                         <p id='service_status'>{{ ['INIT', 'CONNECTED', 'ACTIVE'][service.status] }}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <b>{% trans %}CPU:{% endtrans %}</b>
+                        <b>CPU:</b>
                         <p id='service_cpu'>{{ service.cpu | round(2, 'floor') }} %</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}GPU:{% endtrans %}</b>
+                        <b>GPU:</b>
                         <p id='service_gpu'>{{ service.gpu }} %</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Network in:{% endtrans %}</b>
+                        <b>Network in:</b>
                         <p id='service_bandwidth_in'>{{ service.bandwidth_in }} Mbps</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Network out:{% endtrans %}</b>
+                        <b>Network out:</b>
                         <p id='service_bandwidth_out'>{{ service.bandwidth_out }} Mbps</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}OS:{% endtrans %}</b>
+                        <b>OS:</b>
                         <p id='service_os'>{{ service.os }}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <b>{% trans %}Memory total:{% endtrans %}</b>
+                        <b>Memory total:</b>
                         <p id='service_memory_total'>{{ service.memory_total }} MB</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Memory free:{% endtrans %}</b>
+                        <b>Memory free:</b>
                         <p id='service_memory_free'>{{ service.memory_free }} MB</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}HDD total:{% endtrans %}</b>
+                        <b>HDD total:</b>
                         <p id='service_hdd_total'>{{ service.hdd_total }} MB</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}HDD free:{% endtrans %}</b>
+                        <b>HDD free:</b>
                         <p id='service_hdd_free'>{{ service.hdd_free }} MB</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Online users:{% endtrans %}</b>
+                        <b>Online users:</b>
                         <p id='service_connections'>{{ service.online_users }}</p>
                     </div>
                     <div class="col-md-2">
-                        <b>{% trans %}Version:{% endtrans %}</b>
+                        <b>Version:</b>
                         <p id='service_version'>{{ service.version }}</p>
                     </div>
                 </div>
@@ -302,19 +302,19 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                     <thead>
                                     <tr>
                                         <th class="stream_number">#</th>
-                                        <th class="stream_name">{% trans %}Name{% endtrans %}</th>
-                                        <th class="stream_type">{% trans %}Type{% endtrans %}</th>
-                                        <th class="stream_status">{% trans %}Status{% endtrans %}</th>
-                                        <th class="stream_restarts">{% trans %}Restarts{% endtrans %}</th>
-                                        <th class="stream_cpu">{% trans %}CPU (%){% endtrans %}</th>
-                                        <th class="stream_rss">{% trans %}RSS (MB){% endtrans %}</th>
-                                        <th class="stream_inbps">{% trans %}In (Mbps){% endtrans %}</th>
-                                        <th class="stream_outbps">{% trans %}Out (Mbps){% endtrans %}</th>
-                                        <th class="stream_work_time">{% trans %}TTL (sec){% endtrans %}</th>
-                                        <th class="stream_live_time">{% trans %}RTL (sec){% endtrans %}</th>
-                                        <th class="stream_quality">{% trans %}Quality (%){% endtrans %}</th>
-                                        <th class="stream_price">{% trans %}Price ($){% endtrans %}</th>
-                                        <th class="stream_actions">{% trans %}Actions{% endtrans %}</th>
+                                        <th class="stream_name">Name</th>
+                                        <th class="stream_type">Type</th>
+                                        <th class="stream_status">Status</th>
+                                        <th class="stream_restarts">Restarts</th>
+                                        <th class="stream_cpu">CPU (%)</th>
+                                        <th class="stream_rss">RSS (MB)</th>
+                                        <th class="stream_inbps">In (Mbps)</th>
+                                        <th class="stream_outbps">Out (Mbps)</th>
+                                        <th class="stream_work_time">TTL (sec)</th>
+                                        <th class="stream_live_time">RTL (sec)</th>
+                                        <th class="stream_quality">Quality (%)</th>
+                                        <th class="stream_price">Price ($)</th>
+                                        <th class="stream_actions">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -358,7 +358,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="start_stream(this, '{{ rev.id }}')">
-                                                {% trans %}Start{% endtrans %}
+                                                Start
                                             </button>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -367,7 +367,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="stop_stream(this, '{{ rev.id }}')">
-                                                {% trans %}Stop{% endtrans %}
+                                                Stop
                                             </button>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -376,20 +376,20 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="restart_stream(this, '{{ rev.id }}')">
-                                                {% trans %}Restart{% endtrans %}
+                                                Restart
                                             </button>
                                             <a href="{{ url_for('StreamView:play', sid=rev.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}Play{% endtrans %}
+                                                Play
                                             </a>
                                             <button type="submit" class="btn btn-success btn-xs"
                                                     onclick="edit_stream('{{ rev.id }}')">
-                                                {% trans %}Edit{% endtrans %}
+                                                Edit
                                             </button>
                                             <button type="submit" class="btn btn-danger btn-xs"
                                                     onclick="remove_stream('{{ rev.id }}')">
-                                                {% trans %}Remove{% endtrans %}
+                                                Remove
                                             </button>
                                             {% if (role == 2) %}
                                             <button type="submit"
@@ -399,12 +399,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_log_stream('{{ rev.id }}')">
-                                                {% trans %}Get log{% endtrans %}
+                                                Get log
                                             </button>
                                             <a href="{{ url_for('StreamView:view_log', sid=rev.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}View log{% endtrans %}
+                                                View log
                                             </a>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -413,12 +413,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_pipeline_stream('{{ rev.id }}')">
-                                                {% trans %}GPL{% endtrans %}
+                                                GPL
                                             </button>
                                             <a href="{{ url_for('StreamView:view_pipeline', sid=rev.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}VPL{% endtrans %}
+                                                VPL
                                             </a>
                                             {% endif %}
                                         </td>
@@ -430,24 +430,24 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                             </div>
                             <div class="row">
                                 <button class="btn btn-success btn-send col-md-2" onclick="add_relay_stream()">
-                                    {% trans %}Add relay{% endtrans %}
+                                    Add relay
                                 </button>
                                 <button class="btn btn-success btn-send col-md-2" onclick="add_encode_stream()">
-                                    {% trans %}Add encode{% endtrans %}
+                                    Add encode
                                 </button>
                                 <button class="btn btn-success btn-send col-md-2"
                                         onclick="add_timeshift_recorder_stream()">
-                                    {% trans %}Add timeshift recorder{% endtrans %}
+                                    Add timeshift recorder
                                 </button>
                                 <button class="btn btn-success btn-send col-md-2" onclick="add_catchup_stream()">
-                                    {% trans %}Add catchup{% endtrans %}
+                                    Add catchup
                                 </button>
                                 <button class="btn btn-success btn-send col-md-2"
                                         onclick="add_timeshift_player_stream()">
-                                    {% trans %}Add timeshift player{% endtrans %}
+                                    Add timeshift player
                                 </button>
                                 <button class="btn btn-success btn-send col-md-2" onclick="add_test_life_stream()">
-                                    {% trans %}Add test life{% endtrans %}
+                                    Add test life
                                 </button>
                             </div>
                         </div>
@@ -457,19 +457,19 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                     <thead>
                                     <tr>
                                         <th class="stream_number">#</th>
-                                        <th class="stream_name">{% trans %}Name{% endtrans %}</th>
-                                        <th class="stream_type">{% trans %}Type{% endtrans %}</th>
-                                        <th class="stream_status">{% trans %}Status{% endtrans %}</th>
-                                        <th class="stream_restarts">{% trans %}Restarts{% endtrans %}</th>
-                                        <th class="stream_cpu">{% trans %}CPU (%){% endtrans %}</th>
-                                        <th class="stream_rss">{% trans %}RSS (MB){% endtrans %}</th>
-                                        <th class="stream_inbps">{% trans %}In (Mbps){% endtrans %}</th>
-                                        <th class="stream_outbps">{% trans %}Out (Mbps){% endtrans %}</th>
-                                        <th class="stream_work_time">{% trans %}TTL (sec){% endtrans %}</th>
-                                        <th class="stream_live_time">{% trans %}RTL (sec){% endtrans %}</th>
-                                        <th class="stream_quality">{% trans %}Quality (%){% endtrans %}</th>
-                                        <th class="stream_price">{% trans %}Price ($){% endtrans %}</th>
-                                        <th class="stream_actions">{% trans %}Actions{% endtrans %}</th>
+                                        <th class="stream_name">Name</th>
+                                        <th class="stream_type">Type</th>
+                                        <th class="stream_status">Status</th>
+                                        <th class="stream_restarts">Restarts</th>
+                                        <th class="stream_cpu">CPU (%)</th>
+                                        <th class="stream_rss">RSS (MB)</th>
+                                        <th class="stream_inbps">In (Mbps)</th>
+                                        <th class="stream_outbps">Out (Mbps)</th>
+                                        <th class="stream_work_time">TTL (sec)</th>
+                                        <th class="stream_live_time">RTL (sec)</th>
+                                        <th class="stream_quality">Quality (%)</th>
+                                        <th class="stream_price">Price ($)</th>
+                                        <th class="stream_actions">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -512,16 +512,16 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="start_stream(this, '{{ vod.id }}')">
-                                                {% trans %}Refresh{% endtrans %}
+                                                Refresh
                                             </button>
                                             <a href="{{ url_for('StreamView:play', sid=vod.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}Play{% endtrans %}
+                                                Play
                                             </a>
                                             <button type="submit" class="btn btn-success btn-xs"
                                                     onclick="edit_stream('{{ vod.id }}')">
-                                                {% trans %}Edit{% endtrans %}
+                                                Edit
                                             </button>
                                             {% if (role == 2) %}
                                             <button type="submit"
@@ -531,12 +531,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_log_stream('{{ vod.id }}')">
-                                                {% trans %}Get log{% endtrans %}
+                                                Get log
                                             </button>
                                             <a href="{{ url_for('StreamView:view_log', sid=vod.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}View log{% endtrans %}
+                                                View log
                                             </a>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -545,17 +545,17 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_pipeline_stream('{{ vod.id }}')">
-                                                {% trans %}GPL{% endtrans %}
+                                                GPL
                                             </button>
                                             <a href="{{ url_for('StreamView:view_pipeline', sid=vod.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}VPL{% endtrans %}
+                                                VPL
                                             </a>
                                             {% endif %}
                                             <button type="submit" class="btn btn-danger btn-xs"
                                                     onclick="remove_stream('{{ vod.id }}')">
-                                                {% trans %}Remove{% endtrans %}
+                                                Remove
                                             </button>
                                         </td>
                                     </tr>
@@ -566,10 +566,10 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                             </div>
                             <div class="row">
                                 <button class="btn btn-info btn-send col-md-6" onclick="add_vod_relay_stream()">
-                                    {% trans %}Add vod relay{% endtrans %}
+                                    Add vod relay
                                 </button>
                                 <button class="btn btn-info btn-send col-md-6" onclick="add_vod_encode_stream()">
-                                    {% trans %}Add vod encode{% endtrans %}
+                                    Add vod encode
                                 </button>
                             </div>
                         </div>
@@ -579,19 +579,19 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                     <thead>
                                     <tr>
                                         <th class="stream_number">#</th>
-                                        <th class="stream_name">{% trans %}Name{% endtrans %}</th>
-                                        <th class="stream_type">{% trans %}Type{% endtrans %}</th>
-                                        <th class="stream_status">{% trans %}Status{% endtrans %}</th>
-                                        <th class="stream_restarts">{% trans %}Restarts{% endtrans %}</th>
-                                        <th class="stream_cpu">{% trans %}CPU (%){% endtrans %}</th>
-                                        <th class="stream_rss">{% trans %}RSS (MB){% endtrans %}</th>
-                                        <th class="stream_inbps">{% trans %}In (Mbps){% endtrans %}</th>
-                                        <th class="stream_outbps">{% trans %}Out (Mbps){% endtrans %}</th>
-                                        <th class="stream_work_time">{% trans %}TTL (sec){% endtrans %}</th>
-                                        <th class="stream_live_time">{% trans %}RTL (sec){% endtrans %}</th>
-                                        <th class="stream_quality">{% trans %}Quality (%){% endtrans %}</th>
-                                        <th class="stream_price">{% trans %}Price ($){% endtrans %}</th>
-                                        <th class="stream_actions">{% trans %}Actions{% endtrans %}</th>
+                                        <th class="stream_name">Name</th>
+                                        <th class="stream_type">Type</th>
+                                        <th class="stream_status">Status</th>
+                                        <th class="stream_restarts">Restarts</th>
+                                        <th class="stream_cpu">CPU (%)</th>
+                                        <th class="stream_rss">RSS (MB)</th>
+                                        <th class="stream_inbps">In (Mbps)</th>
+                                        <th class="stream_outbps">Out (Mbps)</th>
+                                        <th class="stream_work_time">TTL (sec)</th>
+                                        <th class="stream_live_time">RTL (sec)</th>
+                                        <th class="stream_quality">Quality (%)</th>
+                                        <th class="stream_price">Price ($)</th>
+                                        <th class="stream_actions">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -634,7 +634,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="start_stream(this, '{{ cod.id }}')">
-                                                {% trans %}Start{% endtrans %}
+                                                Start
                                             </button>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -643,7 +643,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="stop_stream(this, '{{ cod.id }}')">
-                                                {% trans %}Stop{% endtrans %}
+                                                Stop
                                             </button>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -652,20 +652,20 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="restart_stream(this, '{{ cod.id }}')">
-                                                {% trans %}Restart{% endtrans %}
+                                                Restart
                                             </button>
                                             <a href="{{ url_for('StreamView:play', sid=cod.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}Play{% endtrans %}
+                                                Play
                                             </a>
                                             <button type="submit" class="btn btn-success btn-xs"
                                                     onclick="edit_stream('{{ cod.id }}')">
-                                                {% trans %}Edit{% endtrans %}
+                                                Edit
                                             </button>
                                             <button type="submit" class="btn btn-danger btn-xs"
                                                     onclick="remove_stream('{{ cod.id }}')">
-                                                {% trans %}Remove{% endtrans %}
+                                                Remove
                                             </button>
                                             {% if (role == 2) %}
                                             <button type="submit"
@@ -675,12 +675,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_log_stream('{{ cod.id }}')">
-                                                {% trans %}Get log{% endtrans %}
+                                                Get log
                                             </button>
                                             <a href="{{ url_for('StreamView:view_log', sid=cod.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}View log{% endtrans %}
+                                                View log
                                             </a>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -689,12 +689,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_pipeline_stream('{{ cod.id }}')">
-                                                {% trans %}GPL{% endtrans %}
+                                                GPL
                                             </button>
                                             <a href="{{ url_for('StreamView:view_pipeline', sid=cod.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}VPL{% endtrans %}
+                                                VPL
                                             </a>
                                             {% endif %}
                                         </td>
@@ -706,10 +706,10 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                             </div>
                             <div class="row">
                                 <button class="btn btn-info btn-send col-md-6" onclick="add_cod_relay_stream()">
-                                    {% trans %}Add cod relay{% endtrans %}
+                                    Add cod relay
                                 </button>
                                 <button class="btn btn-info btn-send col-md-6" onclick="add_cod_encode_stream()">
-                                    {% trans %}Add cod encode{% endtrans %}
+                                    Add cod encode
                                 </button>
                             </div>
                         </div>
@@ -719,10 +719,10 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                     <thead>
                                     <tr>
                                         <th class="stream_number">#</th>
-                                        <th class="stream_name">{% trans %}Name{% endtrans %}</th>
-                                        <th class="stream_type">{% trans %}Type{% endtrans %}</th>
-                                        <th class="stream_price">{% trans %}Price ($){% endtrans %}</th>
-                                        <th class="stream_actions">{% trans %}Actions{% endtrans %}</th>
+                                        <th class="stream_name">Name</th>
+                                        <th class="stream_type">Type</th>
+                                        <th class="stream_price">Price ($)</th>
+                                        <th class="stream_actions">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -746,15 +746,15 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                             <a href="{{ url_for('StreamView:play', sid=proxy.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}Play{% endtrans %}
+                                                Play
                                             </a>
                                             <button type="submit" class="btn btn-success btn-xs"
                                                     onclick="edit_stream('{{ proxy.id }}')">
-                                                {% trans %}Edit{% endtrans %}
+                                                Edit
                                             </button>
                                             <button type="submit" class="btn btn-danger btn-xs"
                                                     onclick="remove_stream('{{ proxy.id }}')">
-                                                {% trans %}Remove{% endtrans %}
+                                                Remove
                                             </button>
                                         </td>
                                     </tr>
@@ -765,13 +765,13 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                             </div>
                             <div class="row">
                                 <button class="btn btn-warning btn-send col-md-4" onclick="add_proxy_stream()">
-                                    {% trans %}Add proxy stream{% endtrans %}
+                                    Add proxy stream
                                 </button>
                                 <button class="btn btn-warning btn-send col-md-4" onclick="add_proxy_vod()">
-                                    {% trans %}Add proxy vod{% endtrans %}
+                                    Add proxy vod
                                 </button>
                                 <button class="btn btn-warning btn-send col-md-4" onclick="add_proxy_omdb_vod()">
-                                    {% trans %}Add proxy omdb vod{% endtrans %}
+                                    Add proxy omdb vod
                                 </button>
                             </div>
                         </div>
@@ -781,19 +781,19 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                     <thead>
                                     <tr>
                                         <th class="stream_number">#</th>
-                                        <th class="stream_name">{% trans %}Name{% endtrans %}</th>
-                                        <th class="stream_type">{% trans %}Type{% endtrans %}</th>
-                                        <th class="stream_status">{% trans %}Status{% endtrans %}</th>
-                                        <th class="stream_restarts">{% trans %}Restarts{% endtrans %}</th>
-                                        <th class="stream_cpu">{% trans %}CPU (%){% endtrans %}</th>
-                                        <th class="stream_rss">{% trans %}RSS (MB){% endtrans %}</th>
-                                        <th class="stream_inbps">{% trans %}In (Mbps){% endtrans %}</th>
-                                        <th class="stream_outbps">{% trans %}Out (Mbps){% endtrans %}</th>
-                                        <th class="stream_work_time">{% trans %}TTL (sec){% endtrans %}</th>
-                                        <th class="stream_live_time">{% trans %}RTL (sec){% endtrans %}</th>
-                                        <th class="stream_quality">{% trans %}Quality (%){% endtrans %}</th>
-                                        <th class="stream_price">{% trans %}Price ($){% endtrans %}</th>
-                                        <th class="stream_actions">{% trans %}Actions{% endtrans %}</th>
+                                        <th class="stream_name">Name</th>
+                                        <th class="stream_type">Type</th>
+                                        <th class="stream_status">Status</th>
+                                        <th class="stream_restarts">Restarts</th>
+                                        <th class="stream_cpu">CPU (%)</th>
+                                        <th class="stream_rss">RSS (MB)</th>
+                                        <th class="stream_inbps">In (Mbps)</th>
+                                        <th class="stream_outbps">Out (Mbps)</th>
+                                        <th class="stream_work_time">TTL (sec)</th>
+                                        <th class="stream_live_time">RTL (sec)</th>
+                                        <th class="stream_quality">Quality (%)</th>
+                                        <th class="stream_price">Price ($)</th>
+                                        <th class="stream_actions">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -837,7 +837,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="start_stream(this, '{{ event.id }}')">
-                                                {% trans %}Schedule{% endtrans %}
+                                                Schedule
                                             </button>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -846,7 +846,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="stop_stream(this, '{{ event.id }}')">
-                                                {% trans %}Cancel{% endtrans %}
+                                                Cancel
                                             </button>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -855,20 +855,20 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="restart_stream(this, '{{ event.id }}')">
-                                                {% trans %}Restart{% endtrans %}
+                                                Restart
                                             </button>
                                             <a href="{{ url_for('StreamView:play', sid=event.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}Play{% endtrans %}
+                                                Play
                                             </a>
                                             <button type="submit" class="btn btn-success btn-xs"
                                                     onclick="edit_stream('{{ event.id }}')">
-                                                {% trans %}Edit{% endtrans %}
+                                                Edit
                                             </button>
                                             <button type="submit" class="btn btn-danger btn-xs"
                                                     onclick="remove_stream('{{ event.id }}')">
-                                                {% trans %}Remove{% endtrans %}
+                                                Remove
                                             </button>
                                             {% if (role == 2) %}
                                             <button type="submit"
@@ -878,12 +878,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_log_stream('{{ event.id }}')">
-                                                {% trans %}Get log{% endtrans %}
+                                                Get log
                                             </button>
                                             <a href="{{ url_for('StreamView:view_log', sid=event.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}View log{% endtrans %}
+                                                View log
                                             </a>
                                             <button type="submit"
                                                     {% if (service.status== service.status.ACTIVE) %}
@@ -892,12 +892,12 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                                                     class="btn btn-success btn-xs" disabled
                                                     {% endif %}
                                                     onclick="get_pipeline_stream('{{ event.id }}')">
-                                                {% trans %}GPL{% endtrans %}
+                                                GPL
                                             </button>
                                             <a href="{{ url_for('StreamView:view_pipeline', sid=event.id) }}"
                                                class="btn btn-info btn-xs"
                                                role="button">
-                                                {% trans %}VPL{% endtrans %}
+                                                VPL
                                             </a>
                                             {% endif %}
                                         </td>
@@ -909,14 +909,14 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                             </div>
                             <div class="row">
                                 <button class="btn btn-info btn-send col-md-12" onclick="add_event_stream()">
-                                    {% trans %}Add event{% endtrans %}
+                                    Add event
                                 </button>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="series">
                             <div class="row">
                                 <button class="btn btn-info btn-send col-md-12" onclick="add_serial()">
-                                    {% trans %}Add serial{% endtrans %}
+                                    Add serial
                                 </button>
                             </div>
                         </div>
@@ -931,7 +931,7 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                         class="btn btn-success" disabled
                         {% endif %}
                         onclick="start_all_streams()">
-                    {% trans %}Start all streams{% endtrans %}
+                    Start all streams
                 </button>
                 <button type="submit"
                         {% if (service.status== service.status.ACTIVE) %}
@@ -940,11 +940,11 @@ Dashboard | {{ config['PUBLIC_CONFIG'].site.title }}
                         class="btn btn-warning" disabled
                         {% endif %}
                         onclick="stop_all_streams()">
-                    {% trans %}Stop all streams{% endtrans %}
+                    Stop all streams
                 </button>
                 <button type="submit" class="btn btn-danger"
                         onclick="remove_all_streams()">
-                    {% trans %}Remove all streams{% endtrans %}
+                    Remove all streams
                 </button>
             </div>
         </div>

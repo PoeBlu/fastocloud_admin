@@ -7,7 +7,6 @@ from flask_mongoengine import MongoEngine
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
-from flask_babel import Babel
 from flask_socketio import SocketIO
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -49,7 +48,6 @@ def init_project(static_folder, *args):
 
     app.wsgi_app = ProxyFix(app.wsgi_app)
     bootstrap = Bootstrap(app)
-    babel = Babel(app)
     db = MongoEngine(app)
     mail = Mail(app)
     socketio = SocketIO(app)
@@ -82,10 +80,10 @@ def init_project(static_folder, *args):
     omdb_api_key = app.config.get('OMDB_KEY')
     omdb = OMDBClient(apikey=omdb_api_key)
 
-    return app, bootstrap, babel, db, mail, login_manager, servers_manager, omdb
+    return app, bootstrap, db, mail, login_manager, servers_manager, omdb
 
 
-app, bootstrap, babel, db, mail, login_manager, servers_manager, omdb = init_project(
+app, bootstrap, db, mail, login_manager, servers_manager, omdb = init_project(
     'static',
     'config/public_config.py',
     'config/config.py',

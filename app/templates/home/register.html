@@ -11,22 +11,22 @@ Register | {{ config['PUBLIC_CONFIG'].site.title }}
                     href="{{ url_for('HomeView:index') }}">{{ config['PUBLIC_CONFIG'].site.title }}</a></h1>
         </div>
         <div class="panel-body">
-            <h3>{% trans %}Sign Up{% endtrans %}</h3>
-            <p>{% trans %}Note: Your data isn't going anywhere.{% endtrans %}</p>
+            <h3>Sign Up</h3>
+            <p>Note: Your data isn't going anywhere.</p>
             {{ util.flashed_messages(dismissible=True, container=False) }}
             <form action="" method="post" class="form" role="form">
                 {{ form.hidden_tag() }}
                 <div class="form-group  required text-left">
                     <label class="control-label" for="email">{{ form.email.label }}</label>
                     <input class="form-control" id="email" name="email"
-                           placeholder="{% trans %}Your email will be used to contact you.{% endtrans %}" required
+                           placeholder="Your email will be used to contact you." required
                            type="text"
                            value="">
                 </div>
                 <div class="form-group  required text-left">
                     <label class="control-label" for="password">{{ form.password.label }}</label>
                     <input class="form-control" id="password" name="password"
-                           placeholder="{% trans %}Enter a password.{% endtrans %}" required type="password"
+                           placeholder="Enter a password." required type="password"
                            value="">
                 </div>
                 <br>
@@ -43,13 +43,13 @@ Register | {{ config['PUBLIC_CONFIG'].site.title }}
                 {{ form_field(form.submit, class="btn") }}
             </form>
         </div>
-        <div class="panel-footer text-left">{% trans %}Already registered?{% endtrans %}
-            <a class="pull-right" href={{ url_for('HomeView:signin') }}><b>{% trans %}Sign in{% endtrans %}</b></a>
+        <div class="panel-footer text-left">Already registered?
+            <a class="pull-right" href={{ url_for('HomeView:signin') }}><b>Sign in</b></a>
         </div>
     </div>
     <div class="text-center">
         <a class="back-to-site" href="{{ url_for('HomeView:index') }}">
-            &#8592;&nbsp;{% trans %}Home{% endtrans %} {{ config['PUBLIC_CONFIG'].site.title }}
+            &#8592;&nbsp;Home {{ config['PUBLIC_CONFIG'].site.title }}
         </a>
     </div>
 </div>
