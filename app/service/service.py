@@ -233,18 +233,16 @@ class Service(IStreamHandler):
             if ser.id == ObjectId(sid):
                 ser.delete()
 
-    def add_stream(self, stream):
+    def add_stream(self, stream: IStream):
         self.__init_stream_runtime_fields(stream)
         self._streams.append(stream)
-        self._settings.streams.append(stream)
-        self._settings.save()
+        self._settings.add_stream(stream)  #
 
-    def add_streams(self, streams):
+    def add_streams(self, streams: [IStream]):
         for stream in streams:
             self.__init_stream_runtime_fields(stream)
             self._streams.append(stream)
-            self._settings.streams.append(stream)
-        self._settings.save()
+        self._settings.add_streams(streams)  #
 
     def update_stream(self, stream):
         stream.save()
@@ -255,14 +253,14 @@ class Service(IStreamHandler):
                 self._client.stop_stream(sid)
                 self._streams.remove(stream)
                 safe_delete_stream(stream)
-        self._settings.save()
+                self._settings.remove_stream(stream)  #
 
     def remove_all_streams(self):
         for stream in self._streams:
             self._client.stop_stream(stream.get_id())
             safe_delete_stream(stream)
         self._streams = []
-        self._settings.save()
+        self._settings.remove_all_streams()  #
 
     def stop_all_streams(self):
         for stream in self._streams:
