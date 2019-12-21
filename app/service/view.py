@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 
 from app import get_runtime_folder, servers_manager, app
 from app.common.service.forms import ServiceSettingsForm, ActivateForm, UploadM3uForm, ServerProviderForm
-from app.common.subscriber.forms import SignupForm, MessageForm
+from app.common.subscriber.forms import SignupForm
 from app.common.service.entry import ServiceSettings, ProviderPair
 from app.common.subscriber.entry import Subscriber
 from app.common.utils.m3u_parser import M3uParser
@@ -272,21 +272,6 @@ class ServiceView(FlaskView):
             return jsonify(status='ok'), 200
 
         return jsonify(status='failed'), 404
-
-    @login_required
-    @route('/subscriber/send_message/<sid>', methods=['GET', 'POST'])
-    def subscriber_send_message(self, sid):
-        native_balancer = app.config.get('INTERNAL_LOAD_BALANCER')
-        if not native_balancer:
-            return "Send message for internal LB not implemented!"
-
-        subscriber = Subscriber.objects(id=sid).first()
-        form = MessageForm()
-        if request.method == 'POST' and form.validate_on_submit():
-            servers_manager.send_message(subscriber.email, form.get_data())
-            return jsonify(status='ok'), 200
-
-        return render_template('service/subscriber/send_message.html', form=form)
 
     @login_required
     @route('/add', methods=['GET', 'POST'])

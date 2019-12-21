@@ -66,10 +66,6 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
                                     onclick="edit_subscriber('{{ subscriber.id }}')">
                                 Edit
                             </button>
-                            <button type="submit" class="btn btn-success btn-xs"
-                                    onclick="send_message_for_subscriber('{{ subscriber.id }}')">
-                                Send message
-                            </button>
                             <button type="submit" class="btn btn-danger btn-xs"
                                     onclick="remove_subscriber('{{ subscriber.id }}')">
                                 Remove
@@ -178,37 +174,5 @@ Subscribers | {{ config['PUBLIC_CONFIG'].site.title }}
             }
         });
     }
-
-    function send_message(url) {
-        $.ajax({
-            url: url,
-            type: "POST",
-            dataType: 'json',
-            data: $('#send_message_form').serialize(),
-            success: function (response) {
-                console.log(response);
-                $('#service_dialog').modal('hide');
-                window.location.reload();
-            },
-            error: function (error) {
-                console.error(error);
-                $('#service_dialog .modal-content').html(data);
-            }
-        });
-    }
-
-    function send_message_for_subscriber(sid) {
-        var url = "/service/subscriber/send_message/" + sid;
-        $.get(url, function(data) {
-            $('#service_dialog .modal-content').html(data);
-            $('#service_dialog').modal();
-
-            $('#apply').click(function(event) {
-                event.preventDefault();
-                send_message(url);
-            })
-        });
-    }
-
 </script>
 {%- endblock %}
