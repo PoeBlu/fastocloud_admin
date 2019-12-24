@@ -279,7 +279,7 @@ class ServiceView(FlaskView):
         form = ServiceSettingsForm(obj=ServiceSettings())
         if request.method == 'POST' and form.validate_on_submit():
             new_entry = form.make_entry()
-            admin = ProviderPair(current_user.id, ProviderPair.Roles.ADMIN)
+            admin = ProviderPair(user=current_user.id, role=ProviderPair.Roles.ADMIN)
             new_entry.add_provider(admin)
             current_user.add_server(new_entry)
             return jsonify(status='ok'), 200
