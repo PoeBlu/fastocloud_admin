@@ -15,7 +15,7 @@ def servers_refresh():
     servers_manager.refresh()
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(prog=PROJECT_NAME, usage='%(prog)s [options]')
     parser.add_argument('--logs_path', help='logs path (default: {0})'.format(LOGS_PATH), default=LOGS_PATH)
 
@@ -33,3 +33,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         servers_manager.stop()
         http_server.stop()
+
+
+if __name__ == '__main__':
+    main()
