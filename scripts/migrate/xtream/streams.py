@@ -1,8 +1,8 @@
 import json
 
-from app.common.stream.entry import ProxyStream
+from pyfastocloud_models.stream.entry import ProxyStream
 from app.service.service import ServiceSettings
-from app.common.utils.utils import is_valid_http_url
+from pyfastocloud_models.utils.utils import is_valid_http_url
 import pyfastocloud_models.constants as constants
 
 

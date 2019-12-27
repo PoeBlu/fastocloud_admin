@@ -5,7 +5,7 @@ from flask_mail import Message
 from itsdangerous import SignatureExpired, URLSafeTimedSerializer
 
 import pyfastocloud_models.constants as constants
-from app.common.utils.utils import is_valid_email, get_country_code_by_remote_addr
+from pyfastocloud_models.utils.utils import is_valid_email, get_country_code_by_remote_addr
 from app import app, mail, login_manager
 from app.home.entry import ProviderUser, login_user_wrap
 from app.home.forms import ContactForm

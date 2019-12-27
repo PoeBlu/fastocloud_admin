@@ -7,10 +7,10 @@ from flask_login import login_required, current_user
 from app import get_runtime_folder
 from app.common.service.forms import ServiceSettingsForm, ActivateForm, UploadM3uForm, ServerProviderForm
 from app.common.subscriber.forms import SignupForm
-from app.common.service.entry import ServiceSettings, ProviderPair
-from app.common.subscriber.entry import Subscriber
-from app.common.utils.m3u_parser import M3uParser
-from app.common.utils.utils import is_valid_http_url
+from pyfastocloud_models.service.entry import ServiceSettings, ProviderPair
+from pyfastocloud_models.subscriber.entry import Subscriber
+from pyfastocloud_models.utils.m3u_parser import M3uParser
+from pyfastocloud_models.utils.utils import is_valid_http_url
 from app.home.entry import ProviderUser
 import pyfastocloud_models.constants as constants
 

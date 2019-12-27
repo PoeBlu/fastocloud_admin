@@ -6,9 +6,9 @@ from mongoengine import connect
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from app.common.stream.entry import TestLifeStream
-from app.service.service import ServiceSettings
-from app.common.utils.m3u_parser import M3uParser
+from pyfastocloud_models.stream.entry import TestLifeStream
+from pyfastocloud_models.service.entry import ServiceSettings
+from pyfastocloud_models.utils.m3u_parser import M3uParser
 
 PROJECT_NAME = 'test_life'
 

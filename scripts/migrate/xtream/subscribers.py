@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from app.common.subscriber.login.entry import SubscriberUser
-from app.common.subscriber.entry import Device
+from pyfastocloud_models.subscriber.login.entry import SubscriberUser
+from pyfastocloud_models.subscriber.entry import Device
 from app.service.service import ServiceSettings
 
 

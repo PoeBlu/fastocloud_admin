@@ -2,8 +2,8 @@ from flask_classy import FlaskView, route
 from flask import render_template, redirect, url_for
 from flask_login import login_required, current_user
 
-from app.common.service.entry import ServiceSettings
-from app.common.epg.entry import Epg
+from pyfastocloud_models.service.entry import ServiceSettings
+from pyfastocloud_models.epg.entry import Epg
 
 
 # routes

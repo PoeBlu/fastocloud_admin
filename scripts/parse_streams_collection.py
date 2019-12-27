@@ -8,7 +8,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 PROJECT_NAME = 'parse_streams_collection'
 
-from app.common.stream.entry import IStream
+from pyfastocloud_models.stream.entry import IStream
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog=PROJECT_NAME, usage='%(prog)s [options]')

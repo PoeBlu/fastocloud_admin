@@ -1,12 +1,12 @@
 from bson.objectid import ObjectId
 
-from app.common.stream.entry import IStream, ProxyStream, EncodeStream, RelayStream, TimeshiftRecorderStream, \
+from pyfastocloud_models.stream.entry import IStream, ProxyStream, EncodeStream, RelayStream, TimeshiftRecorderStream, \
     CatchupStream, TimeshiftPlayerStream, TestLifeStream, VodRelayStream, VodEncodeStream, ProxyVodStream, \
     CodRelayStream, CodEncodeStream, EventStream
 from pyfastocloud.client_constants import ClientStatus
 
-from app.common.series.entry import Serial
-from app.common.service.entry import ServiceSettings, ProviderPair, safe_delete_stream
+from pyfastocloud_models.series.entry import Serial
+from pyfastocloud_models.service.entry import ServiceSettings, ProviderPair, safe_delete_stream
 from app.service.service_client import ServiceClient, OperationSystem
 from app.service.stream_handler import IStreamHandler
 

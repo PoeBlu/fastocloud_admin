@@ -7,8 +7,8 @@ from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_required
 
 from app.common.epg.forms import EpgForm, UploadEpgForm
-from app.common.epg.entry import Epg
-from app.common.utils.utils import download_file
+from pyfastocloud_models.epg.entry import Epg
+from pyfastocloud_models.utils.utils import download_file
 from app import app, get_epg_tmp_folder
 
 
