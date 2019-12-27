@@ -13,3 +13,4 @@ gevent>=1.1.0
 omdb>=0.10.1
 git+git://github.com/fastogt/pyfastogt@master#egg=pyfastogt
 git+git://github.com/fastogt/pyfastocloud@master#egg=pyfastocloud
+git+git://github.com/fastogt/pyfastocloud_models@master#egg=pyfastocloud_models

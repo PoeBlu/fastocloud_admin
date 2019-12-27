@@ -3,7 +3,7 @@ import json
 from app.common.stream.entry import ProxyStream
 from app.service.service import ServiceSettings
 from app.common.utils.utils import is_valid_http_url
-import app.common.constants as constants
+import pyfastocloud_models.constants as constants
 
 
 def import_streams_to_server(db, server: ServiceSettings):

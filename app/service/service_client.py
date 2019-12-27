@@ -7,7 +7,7 @@ from pyfastocloud.client_constants import ClientStatus
 import pyfastocloud.socket.gevent as gsocket
 
 from app.service.stream_handler import IStreamHandler
-import app.common.constants as constants
+import pyfastocloud_models.constants as constants
 
 
 class OperationSystem(object):

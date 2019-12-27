@@ -12,7 +12,7 @@ from app.common.subscriber.entry import Subscriber
 from app.common.utils.m3u_parser import M3uParser
 from app.common.utils.utils import is_valid_http_url
 from app.home.entry import ProviderUser
-import app.common.constants as constants
+import pyfastocloud_models.constants as constants
 
 
 # routes

@@ -1,7 +1,7 @@
 from flask import session
 from flask_login import UserMixin, login_user, logout_user
 
-from app.common.provider.entry import Provider
+from pyfastocloud_models.provider.entry import Provider
 
 SERVER_POSITION_SESSION_FIELD = 'server_position'
 

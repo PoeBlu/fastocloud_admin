@@ -6,7 +6,7 @@ from flask_classy import FlaskView, route
 from flask import render_template, request, jsonify, Response
 from flask_login import login_required, current_user
 
-import app.common.constants as constants
+import pyfastocloud_models.constants as constants
 from app import get_runtime_stream_folder, omdb
 from app.common.stream.entry import IStream
 from app.common.stream.forms import ProxyStreamForm, EncodeStreamForm, RelayStreamForm, TimeshiftRecorderStreamForm, \
