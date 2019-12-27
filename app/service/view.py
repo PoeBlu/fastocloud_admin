@@ -202,7 +202,8 @@ class ServiceView(FlaskView):
     def provider_add(self, sid):
         form = ServerProviderForm()
         if request.method == 'POST' and form.validate_on_submit():
-            provider = ProviderUser.objects(email=form.email.data).first()
+            email = form.email.data.lower()
+            provider = ProviderUser.objects(email=email).first()
             server = ServiceSettings.objects(id=sid).first()
             if server and provider:
                 admin = ProviderPair(provider.id, form.role.data)
