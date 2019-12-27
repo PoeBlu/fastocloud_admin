@@ -4,7 +4,7 @@ from flask_classy import FlaskView, route
 from flask import render_template, redirect, url_for, request, jsonify, Response
 from flask_login import login_required, current_user
 
-from app import get_runtime_folder, servers_manager, app
+from app import get_runtime_folder
 from app.common.service.forms import ServiceSettingsForm, ActivateForm, UploadM3uForm, ServerProviderForm
 from app.common.subscriber.forms import SignupForm
 from app.common.service.entry import ServiceSettings, ProviderPair

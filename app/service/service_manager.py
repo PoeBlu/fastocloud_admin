@@ -1,7 +1,6 @@
 from app.common.service.entry import ServiceSettings
 from app.service.service import Service
 
-from gevent import socket
 from gevent import select
 
 

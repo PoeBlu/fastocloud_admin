@@ -6,8 +6,6 @@ from flask_classy import FlaskView, route
 from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_required
 
-from pyfastogt.utils import read_file_line_by_line_to_set
-
 from app.common.epg.forms import EpgForm, UploadEpgForm
 from app.common.epg.entry import Epg
 from app.common.utils.utils import download_file
