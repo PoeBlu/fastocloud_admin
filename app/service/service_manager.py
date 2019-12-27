@@ -1,4 +1,4 @@
-from pyfastoloud_models.service.entry import ServiceSettings
+from pyfastocloud_models.service.entry import ServiceSettings
 from app.service.service import Service
 
 from gevent import select
