@@ -17,7 +17,7 @@ services:
         ports:
             - 8080:8080
     fastocloud:
-        build: https://github.com/fastogt/fastocloud.git
+        build: fastogt/fastocloud
         container_name: fastocloud
         ports:
             - 6001:6001
