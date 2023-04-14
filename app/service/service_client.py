@@ -148,15 +148,18 @@ class ServiceClient(IClientHandler):
         if not req:
             return
 
-        if req.method == Commands.ACTIVATE_COMMAND and resp.is_message():
-            if self._handler:
-                result = resp.result
+        if (
+            req.method == Commands.ACTIVATE_COMMAND
+            and resp.is_message()
+            and self._handler
+        ):
+            result = resp.result
 
-                os = OperationSystem(**result[ServiceClient.OS])
+            os = OperationSystem(**result[ServiceClient.OS])
 
-                self._set_runtime_fields(result[ServiceClient.HTTP_HOST], result[ServiceClient.VODS_HOST],
-                                         result[ServiceClient.CODS_HOST], result[ServiceClient.VERSION], os)
-                self._handler.on_service_statistic_received(result)
+            self._set_runtime_fields(result[ServiceClient.HTTP_HOST], result[ServiceClient.VODS_HOST],
+                                     result[ServiceClient.CODS_HOST], result[ServiceClient.VERSION], os)
+            self._handler.on_service_statistic_received(result)
 
         if req.method == Commands.PREPARE_SERVICE_COMMAND and resp.is_message():
             for directory in resp.result:

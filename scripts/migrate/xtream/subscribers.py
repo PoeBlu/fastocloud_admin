@@ -16,11 +16,9 @@ def import_subscribers_to_server(db, server: ServiceSettings):
                                                   last_name=sql_entry['username'], password=sql_entry['password'],
                                                   country='US', language='US')
         new_user.status = Subscriber.Status.ACTIVE
-        created_at = sql_entry['created_at']
-        if created_at:
+        if created_at := sql_entry['created_at']:
             new_user.created_date = datetime.fromtimestamp(created_at)
-        exp_date = sql_entry['exp_date']
-        if exp_date:
+        if exp_date := sql_entry['exp_date']:
             new_user.exp_date = datetime.fromtimestamp(exp_date)
         dev = Device(name='Xtream')
         new_user.add_device(dev)

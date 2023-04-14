@@ -23,8 +23,7 @@ class ProviderUser(UserMixin, Provider):
         if not self.servers:
             return None
 
-        server_settings = self.servers[session[SERVER_POSITION_SESSION_FIELD]]
-        if server_settings:
+        if server_settings := self.servers[session[SERVER_POSITION_SESSION_FIELD]]:
             from app import servers_manager
             return servers_manager.find_or_create_server(server_settings)
 

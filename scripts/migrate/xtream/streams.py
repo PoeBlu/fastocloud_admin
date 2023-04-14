@@ -21,11 +21,11 @@ def import_streams_to_server(db, server: ServiceSettings):
         stream.output.urls[0].uri = urls[0]
         stream.name = sql_entry['stream_display_name']
         tvg_logo = sql_entry['stream_icon']
-        if len(tvg_logo) < constants.MAX_URL_LENGTH:
-            if is_valid_http_url(tvg_logo, timeout=0.1):
-                stream.tvg_logo = tvg_logo
-        epg_id = sql_entry['channel_id']
-        if epg_id:
+        if len(tvg_logo) < constants.MAX_URL_LENGTH and is_valid_http_url(
+            tvg_logo, timeout=0.1
+        ):
+            stream.tvg_logo = tvg_logo
+        if epg_id := sql_entry['channel_id']:
             stream.tvg_id = epg_id
 
         stream.save()

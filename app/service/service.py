@@ -112,28 +112,23 @@ class Service(IStreamHandler):
         return self._client.sync_service(settings)
 
     def get_log_stream(self, sid: str):
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             self._client.get_log_stream(self._host, self._port, sid, stream.generate_feedback_dir())
 
     def get_pipeline_stream(self, sid):
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             self._client.get_pipeline_stream(self._host, self._port, sid, stream.generate_feedback_dir())
 
     def start_stream(self, sid: str):
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             self._client.start_stream(stream.config())
 
     def stop_stream(self, sid: str):
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             self._client.stop_stream(sid)
 
     def restart_stream(self, sid: str):
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             self._client.restart_stream(sid)
 
     def get_vods_in(self) -> list:
@@ -211,18 +206,20 @@ class Service(IStreamHandler):
         return self._streams
 
     def find_stream_by_id(self, sid: str):
-        for stream in self._streams:
-            if stream.id == ObjectId(sid):
-                return stream
-
-        return None
+        return next(
+            (stream for stream in self._streams if stream.id == ObjectId(sid)),
+            None,
+        )
 
     def get_user_role_by_id(self, uid: ObjectId) -> ProviderPair.Roles:
-        for user in self._settings.providers:
-            if user.user.id == uid:
-                return user.role
-
-        return ProviderPair.Roles.READ
+        return next(
+            (
+                user.role
+                for user in self._settings.providers
+                if user.user.id == uid
+            ),
+            ProviderPair.Roles.READ,
+        )
 
     def add_serial(self, serial):
         self._settings.series.append(serial)
@@ -325,8 +322,7 @@ class Service(IStreamHandler):
     # handler
     def on_stream_statistic_received(self, params: dict):
         sid = params['id']
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             stream.update_runtime_fields(params)
             self.__notify_front(Service.STREAM_DATA_CHANGED, stream.to_dict())
 
@@ -340,8 +336,7 @@ class Service(IStreamHandler):
 
     def on_quit_status_stream(self, params: dict):
         sid = params['id']
-        stream = self.find_stream_by_id(sid)
-        if stream:
+        if stream := self.find_stream_by_id(sid):
             stream.reset()
             self.__notify_front(Service.STREAM_DATA_CHANGED, stream.to_dict())
 
@@ -358,7 +353,7 @@ class Service(IStreamHandler):
 
     # private
     def __notify_front(self, channel: str, params: dict):
-        unique_channel = channel + '_' + str(self.id)
+        unique_channel = f'{channel}_{str(self.id)}'
         self._socketio.emit(unique_channel, params)
 
     def __reset(self):

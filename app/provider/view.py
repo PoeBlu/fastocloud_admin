@@ -12,12 +12,9 @@ class ProviderView(FlaskView):
 
     @login_required
     def dashboard(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             streams = server.get_streams()
-            front_streams = []
-            for stream in streams:
-                front_streams.append(stream.to_dict())
+            front_streams = [stream.to_dict() for stream in streams]
             role = server.get_user_role_by_id(current_user.id)
             return render_template('provider/dashboard.html', streams=front_streams, service=server,
                                    servers=current_user.servers, role=role)

@@ -65,8 +65,7 @@ class EpgView(FlaskView):
     @route('/remove', methods=['POST'])
     def remove(self):
         sid = request.form['sid']
-        epg = Epg.objects(id=sid).first()
-        if epg:
+        if epg := Epg.objects(id=sid).first():
             epg.delete()
             return jsonify(status='ok'), 200
 
@@ -98,10 +97,7 @@ class EpgView(FlaskView):
         if form.validate_on_submit():
             file_handle = form.file.data
             content = file_handle.read().decode('utf-8')
-            url_set = set()
-            for line in content.split():
-                url_set.add(line.strip())
-
+            url_set = {line.strip() for line in content.split()}
             for uniq in url_set:
                 epg = Epg()
                 epg.uri = uniq

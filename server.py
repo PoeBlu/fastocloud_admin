@@ -8,7 +8,7 @@ from gevent.pywsgi import WSGIServer
 from app import app, servers_manager
 
 PROJECT_NAME = 'fastocloud_iptv_admin'
-LOGS_PATH = PROJECT_NAME + '.log'
+LOGS_PATH = f'{PROJECT_NAME}.log'
 
 
 def servers_refresh():

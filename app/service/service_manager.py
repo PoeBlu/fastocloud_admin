@@ -34,11 +34,11 @@ class ServiceManager(object):
 
     def refresh(self):
         while not self._stop_listen:
-            rsockets = []
-            for server in self._servers_pool:
-                if server.is_connected():
-                    rsockets.append(server.socket())
-
+            rsockets = [
+                server.socket()
+                for server in self._servers_pool
+                if server.is_connected()
+            ]
             readable, writeable, _ = select.select(rsockets, [], [], 1)
             for read in readable:
 

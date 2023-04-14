@@ -19,8 +19,7 @@ if __name__ == '__main__':
 
     argv = parser.parse_args()
 
-    mongo = connect(argv.mongo_uri)
-    if mongo:
+    if mongo := connect(argv.mongo_uri):
         service_settings = ServiceSettings.objects().first()
         m3u_parser = M3uParser()
         m3u_parser.read_m3u(argv.uri)

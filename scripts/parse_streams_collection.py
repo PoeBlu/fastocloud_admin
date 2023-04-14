@@ -16,12 +16,10 @@ if __name__ == '__main__':
 
     argv = parser.parse_args()
 
-    mongo = connect(host=argv.mongo_uri)
-    if mongo:
+    if mongo := connect(host=argv.mongo_uri):
         streams = IStream.objects()
-        f = open("out.m3u", "w")
-        f.write('#EXTM3U\n')
-        idx = 0
-        for stream in streams:
-            f.write(stream.generate_input_playlist(False))
-        f.close()
+        with open("out.m3u", "w") as f:
+            f.write('#EXTM3U\n')
+            idx = 0
+            for stream in streams:
+                f.write(stream.generate_input_playlist(False))

@@ -72,7 +72,10 @@ class ServiceView(FlaskView):
                         stream = server.make_test_life_stream()
 
                     input_url = file['link']
-                    if stream_type == constants.StreamType.PROXY or stream_type == constants.StreamType.VOD_PROXY:
+                    if stream_type in [
+                        constants.StreamType.PROXY,
+                        constants.StreamType.VOD_PROXY,
+                    ]:
                         stream.output.urls[0].uri = input_url
                     else:
                         stream.input.urls[0].uri = input_url
@@ -96,9 +99,12 @@ class ServiceView(FlaskView):
                         stream.group = tvg_group
 
                     tvg_logo = file['tvg-logo']
-                    if len(tvg_logo) < constants.MAX_URL_LENGTH:
-                        if is_valid_http_url(tvg_logo, timeout=0.1):
-                            stream.tvg_logo = tvg_logo
+                    if len(
+                        tvg_logo
+                    ) < constants.MAX_URL_LENGTH and is_valid_http_url(
+                        tvg_logo, timeout=0.1
+                    ):
+                        stream.tvg_logo = tvg_logo
 
                     stream.save()
                     streams.append(stream)
@@ -109,15 +115,13 @@ class ServiceView(FlaskView):
 
     @login_required
     def connect(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             server.connect()
         return redirect(url_for('ProviderView:dashboard'))
 
     @login_required
     def disconnect(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             server.disconnect()
         return redirect(url_for('ProviderView:dashboard'))
 
@@ -125,57 +129,49 @@ class ServiceView(FlaskView):
     @login_required
     def activate(self):
         form = ActivateForm()
-        if request.method == 'POST':
-            server = current_user.get_current_server()
-            if server:
-                if form.validate_on_submit():
-                    license = form.license.data
-                    server.activate(license)
-                    return redirect(url_for('ProviderView:dashboard'))
+        if server := current_user.get_current_server():
+            if request.method == 'POST' and form.validate_on_submit():
+                license = form.license.data
+                server.activate(license)
+                return redirect(url_for('ProviderView:dashboard'))
 
         return render_template('service/activate.html', form=form)
 
     @login_required
     def sync(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             server.sync()
         return redirect(url_for('ProviderView:dashboard'))
 
     @login_required
     def stop(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             server.stop(1)
         return redirect(url_for('ProviderView:dashboard'))
 
     @login_required
     def ping(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             server.ping()
         return redirect(url_for('ProviderView:dashboard'))
 
     @login_required
     def get_log(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             server.get_log_service()
         return redirect(url_for('ProviderView:dashboard'))
 
     @login_required
     @route('/playlist/<sid>/master.m3u', methods=['GET'])
     def playlist(self, sid):
-        server = ServiceSettings.objects(id=sid).first()
-        if server:
+        if server := ServiceSettings.objects(id=sid).first():
             return Response(server.generate_playlist(), mimetype='application/x-mpequrl'), 200
 
         return jsonify(status='failed'), 404
 
     @login_required
     def view_log(self):
-        server = current_user.get_current_server()
-        if server:
+        if server := current_user.get_current_server():
             path = os.path.join(get_runtime_folder(), str(server.id))
             try:
                 with open(path, "r") as f:
@@ -191,8 +187,7 @@ class ServiceView(FlaskView):
 
     @login_required
     def providers(self, sid):
-        server = ServiceSettings.objects(id=sid).first()
-        if server:
+        if server := ServiceSettings.objects(id=sid).first():
             return render_template('service/providers.html', server=server)
 
         return redirect(url_for('ProviderView:dashboard'))
@@ -229,8 +224,7 @@ class ServiceView(FlaskView):
 
     @login_required
     def subscribers(self, sid):
-        server = ServiceSettings.objects(id=sid).first()
-        if server:
+        if server := ServiceSettings.objects(id=sid).first():
             return render_template('service/subscribers.html', server=server)
 
         return redirect(url_for('ProviderView:dashboard'))
@@ -240,8 +234,7 @@ class ServiceView(FlaskView):
     def subscriber_add(self, sid):
         form = SignupForm()
         if request.method == 'POST' and form.validate_on_submit():
-            server = ServiceSettings.objects(id=sid).first()
-            if server:
+            if server := ServiceSettings.objects(id=sid).first():
                 new_entry = form.make_entry()
                 new_entry.add_server(server)
 
@@ -267,8 +260,7 @@ class ServiceView(FlaskView):
     def remove_subscriber(self):
         data = request.get_json()
         sid = data['sid']
-        subscriber = Subscriber.objects(id=sid).first()
-        if subscriber:
+        if subscriber := Subscriber.objects(id=sid).first():
             subscriber.delete()
             return jsonify(status='ok'), 200
 
@@ -291,8 +283,7 @@ class ServiceView(FlaskView):
     @route('/remove', methods=['POST'])
     def remove(self):
         sid = request.form['sid']
-        server = ServiceSettings.objects(id=sid).first()
-        if server:
+        if server := ServiceSettings.objects(id=sid).first():
             server.delete()
             return jsonify(status='ok'), 200
 

@@ -72,7 +72,9 @@ class HomeView(FlaskView):
     def contact(self):
         form = ContactForm()
 
-        if request.method == 'POST':
+        if request.method == 'GET':
+            return render_template('contact.html', form=form)
+        elif request.method == 'POST':
             if not form.validate_on_submit():
                 flash('All fields are required.')
                 return render_template('contact.html', form=form)
@@ -80,13 +82,11 @@ class HomeView(FlaskView):
             send_email(form.email.data, form.subject.data, form.message.data)
             return render_template('contact.html', success=True)
 
-        elif request.method == 'GET':
-            return render_template('contact.html', form=form)
-
     @route('/language/<language>')
     def set_language(self, language=constants.DEFAULT_LOCALE):
-        founded = next((x for x in constants.AVAILABLE_LOCALES if x == language), None)
-        if founded:
+        if founded := next(
+            (x for x in constants.AVAILABLE_LOCALES if x == language), None
+        ):
             session['language'] = founded
 
         return redirect(url_for('HomeView:index'))
@@ -95,8 +95,7 @@ class HomeView(FlaskView):
         try:
             email = self._confirm_link_generator.loads(token, salt=HomeView.SALT_LINK,
                                                        max_age=HomeView.CONFIRM_LINK_TTL)
-            confirm_user = ProviderUser.objects(email=email).first()
-            if confirm_user:
+            if confirm_user := ProviderUser.objects(email=email).first():
                 confirm_user.status = ProviderUser.Status.ACTIVE
                 confirm_user.save()
                 login_user_wrap(confirm_user)
@@ -140,8 +139,7 @@ class HomeView(FlaskView):
                 flash_error('Invalid email.')
                 return render_template('home/register.html', form=form)
 
-            existing_user = ProviderUser.objects(email=email).first()
-            if existing_user:
+            if existing_user := ProviderUser.objects(email=email).first():
                 return redirect(url_for('HomeView:signin'))
 
             new_user = ProviderUser.make_provider(email=email, password=form.password.data, country=form.country.data,
